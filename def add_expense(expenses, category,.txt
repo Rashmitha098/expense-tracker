@@ -1,0 +1,41 @@
+def add_expense(expenses, category, amount, date):
+    if category not in expenses:
+        expenses[category] = []
+    expenses[category].append((amount, date))
+
+def display_summary(expenses):
+    total_spent = 0
+    print("\nExpense Summary:")
+    for category, transactions in expenses.items():
+        category_total = sum(amount for amount, _ in transactions)
+        total_spent += category_total
+        print(f"{category}: ${category_total:.2f}")
+    print(f"Total Spent: ${total_spent:.2f}")
+
+def main():
+    expenses = {}
+    print("Expense Tracker\n")
+
+    while True:
+        print("\n1. Add Expense")
+        print("2. Display Summary")
+        print("3. Exit")
+
+        choice = input("Enter your choice (1/2/3): ")
+
+        if choice == "1":
+            category = input("Enter the category of the expense: ")
+            amount = float(input("Enter the amount spent: "))
+            date = input("Enter the date (YYYY-MM-DD): ")
+            add_expense(expenses, category, amount, date)
+            print("Expense added successfully!")
+        elif choice == "2":
+            display_summary(expenses)
+        elif choice == "3":
+            print("Exiting the Expense Tracker.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
